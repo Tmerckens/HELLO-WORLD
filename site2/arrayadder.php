@@ -1,6 +1,7 @@
 <?php
 $text = file_get_contents('items.json');
-$item = json_decode($text, true);
+$ritem = json_decode($text, true);
+$item = array_reverse($ritem);
 $id = $_POST['id'];
 $title = $_POST['title'];
 $url = $_POST['url'];
