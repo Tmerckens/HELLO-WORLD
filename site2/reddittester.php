@@ -9,23 +9,27 @@
 	<?php echo 'lol';?>
 	<script>
 		$.getJSON("https://www.reddit.com/r/Leiden/new.json", function(data) {
+			data.reverse();
 			$.each(data.data.children, function(i, f) {
 				if(String(f.data.stickied) == "false" && String(f.data.title).substring(0,13) != 'Slowchat Week') {
 					$.getJSON('items.json', function(local) {
+						var test = false;
 						$.each(local.items, function(i, l) {
 							if(l.id == f.data.id) {
-								return;
+								test = true;
 							}
 						})
 						console.log('toevoegen');
-						$.ajax({
-							data: {title: f.data.title, url: f.data.url, id: f.data.id, thumbnail: f.data.thumbnail, createdtime: f.data.created_utc},
-							url: '/arrayadder.php',
-							method: 'POST',
-							success:function(msg) {
-								alert(msg);
-							}
-						});
+						if(!test) {
+							$.ajax({
+								data: {title: f.data.title, url: f.data.url, id: f.data.id, thumbnail: f.data.thumbnail, createdtime: f.data.created_utc, source: "reddit"},
+								url: '/arrayadder.php',
+								method: 'POST',
+								success:function(msg) {
+									alert(msg);
+								}
+							});
+						}
 					})
 					
 				}

@@ -6,7 +6,7 @@ $title = $_POST['title'];
 $url = $_POST['url'];
 $thumbnail = $_POST['thumbnail'];
 $time = $_POST['createdtime'];
-$source = "reddit";
+$source = $_POST['source'];
 $add = array('id' => $id, 'title' => $title, 'url' => $url, 'thumbnail' => $thumbnail, 'time' => $time, 'source' => $source);
 
 foreach($item as $x => &$rx_item) {
